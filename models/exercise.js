@@ -33,3 +33,7 @@ distance:{
     type:Number,
 }
 })
+
+const exercise = mongoose.model("exercise",exerciseSchema);
+
+module.exports = exercise;
