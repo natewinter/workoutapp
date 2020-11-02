@@ -48,6 +48,16 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fittnesdb", { u
           });
       });
 
+      app.get("/exercises", (req, res) => {
+        db.exercise.find({})
+          .then(dbexercise  => {
+            res.json(dbexercise);
+          })
+          .catch(err => {
+            res.json(err);
+          });
+      });
+
       app.get("/exercises/:id", (req, res) => {
         db.exercise.find({})
           .then(dbexercise  => {
@@ -68,11 +78,31 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fittnesdb", { u
           });
       });
 
-      app.get("/populated", (req, res) => {
-        db.workoutPlan.find({})
+      app.post("/submit/:id", (req, res) => {
+        const exerciseInformation = {
+            name: req.body.name,
+            duration: req.body.duration,
+            weight: req.body.weight,
+            type: req.body.type,
+            reps: req.body.reps,
+            sets: req.body.sets,
+            distance: req.body.distance
+        };
+        db.exercise.create(exerciseInformation)
+          .then(({ _id }) => db.workout.findOneAndUpdate({_id: mongojs.ObjectId(req.params.id)}, { $push: { exercises: _id } }, { new: true }))
+          .then(dbUser => {
+            res.json(dbUser);
+          })
+          .catch(err => {
+            res.json(err);
+          });
+    });
+
+      app.get("/populated/:id", (req, res) => {
+        db.workoutPlan.findOne({_id: mongojs.ObjectId(req.params.id)})
           .populate("exercise")
           .then(dbworkoutPlan => {
-            res.json(dbworkoutPlan);
+            console.log(dbworkoutPlan);
           })
           .catch(err => {
             res.json(err);

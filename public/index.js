@@ -16,25 +16,57 @@ function createWorkouts(){
     };
     $(".workoutBtn").click(function(event){
         event.preventDefault();
+        $.ajax({
+            url:`/populated/`+`${this.value}`,
+            method:"GET"
+        }).then(
+            console.log(this.value)
+        )
     })
 })
 }
 
 
-function editWorkout(id){
-    console.log("editing")
-    // console.log($(this).val())
-    console.log(id)
+$("#submitCardio").click(function(event){
+    event.preventDefault();
+    const cardio = {
+        name:$("#name").val().trim(),
+        duration:$("#duration").val().trim(),
+        distance:$("#distance").val().trim()
+    };
     $.ajax({
-        url:"/workoutplan/"+id,
-        method: "GET"
-    }).then(workout => {
-      
-        })
-
+        url:`/submit/`
     })
-}
+})
+// function editWorkout(id){
+//     console.log("editing")
+//     // console.log($(this).val())
+//     console.log(id)
+//     $.ajax({
+//         url:"/workoutplan/"+id,
+//         method: "GET"
+//     }).then(workout => {
+      
+//         })
 
+//     })
+// }
+function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  } 
+function myFunction2() {
+    var x = document.getElementById("myDIV2");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  } 
 
 
 $(document).ready(() => {

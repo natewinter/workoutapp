@@ -6,6 +6,7 @@ const exerciseSchema = new Schema ({
 name:{
     type:String,
     trim:true,
+    required:"enter a name for exercise!"
 },
 type:{
     type:String,

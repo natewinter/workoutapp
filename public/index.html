@@ -25,9 +25,29 @@
   </form>
 <div class="workoutBtns"></div>
 <div class="editWorkout">
-  
+  <button onclick="myFunction()">cardio?</button>
+  <button onclick="myFunction2()">weights?</button>
+
+  <div id="myDIV" style= "display:none">
+    <form id="exercise-form2">
+      <input type="text" placeholder="name" name="name" id="duration">
+      <input type="number" class="cardio" placeholder="Duration" name="duration" id="duration" >
+      <input type="number" class="cardio" placeholder="Distance" name="distance" id="distance" >
+      <button class="btn btn-lg btn-primary btn-block submit" id="submitCardio"  value="">Submit</button>
+  </form>
+  </div> 
+
+  <div id="myDIV2" style="display:none">
+    <form id="exercise-form3">
+      <input type="number" class="weights" placeholder="Weight" name="weight" id="weight" >
+      <input type="number" class="weights" placeholder="Reps" name="reps" id="reps" >
+      <input type="number" class="weights" placeholder="Sets" name="sets" id="sets" >
+      <button class="btn btn-lg btn-primary btn-block submit" id="submitWeights"  value="">Submit</button>
+  </form>
+  </div> 
+  </div>
 </div>
-</div>
+<div id="populateHere"></div>
 <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <script src="index.js"></script>
 </body>
