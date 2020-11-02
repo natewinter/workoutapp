@@ -6,7 +6,7 @@ const workoutPlanSchema = new Schema ({
 name:{
     type:String,
     trim:true,
-    required:"Exercise name required!"
+    required:"workout name required!"
 },
 exercise:[
     {
