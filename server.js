@@ -108,6 +108,17 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fittnesdb", { u
             res.json(err);
           });
       });
+  
+      app.get("/populated", (req, res) => {
+        db.workoutPlan.find({})
+          .populate("exercise")
+          .then(dbLibrary => {
+            res.json(dbLibrary);
+          })
+          .catch(err => {
+            res.json(err);
+          });
+      });
 
     app.listen(PORT, () => {
         console.log(`App running on https:/localhost:${PORT}`);

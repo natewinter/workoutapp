@@ -22,7 +22,7 @@ function createWorkouts() {
             }).then(Workout =>{
                 for (var i=0;i<Workout.exercises.length;i++) {
                     if (Workout.exercises[i].type === "cardio") {
-                        $(".cardio-section").append(`
+                        $("#populateHere").append(`
                         <div class="exercise-entry" style="padding:1rem">
                         <p style="margin:0">Name: ${Workout.exercises[i].name}</p>
                         <p style="margin:0">Duration: ${Workout.exercises[i].duration}</p>
@@ -31,7 +31,7 @@ function createWorkouts() {
                     `)
                     }
                     else if (Workout.exercises[i].type === "weights") {
-                        $(".weights-section").append(`
+                        $("#populateHere").append(`
                         <div class="exercise-entry" style="padding:1rem">
                         <p style="margin:0">Name: ${Workout.exercises[i].name}</p>
                         <p style="margin:0">Weights: ${Workout.exercises[i].weight}</p>
@@ -54,8 +54,13 @@ $("#submitCardio").click(function (event) {
         duration: $("#duration").val().trim(),
         distance: $("#distance").val().trim()
     };
+    console.log(cardio)
     $.ajax({
-        url: `/submit/`
+        url: `/submit/`+`${this._id}`,
+        data:cardio,
+        method:"POST"
+    }).then(newExercise => {
+        console.log(newExercise)
     })
 })
 // function editWorkout(id){
